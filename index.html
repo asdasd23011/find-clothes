@@ -189,7 +189,7 @@
 
 <script>
 window.__COMOLI__ = {
-  "generatedAt": "2026-06-09T02:38:50.519Z",
+  "generatedAt": "2026-06-09T02:55:27.602Z",
   "note": "프리뷰: COVERCHORD 실데이터(온라인 게시 9개) + DIVERSE/casanova/MAIDENS/COTYLE 실데이터 + 합성 1숍. 발매순 정렬(공식 INFO 기준).",
   "products": [
     {
@@ -25862,6 +25862,12 @@ window.__COMOLI__ = {
   const DATA = window.__COMOLI__ || { products: [], unmatched: [] };
   const $ = (s, r = document) => r.querySelector(s);
 
+  // ---- 보안: 숍에서 긁어온 제3자 데이터를 DOM에 넣을 때 XSS 방지 ----
+  // 텍스트는 HTML 이스케이프, URL은 http(s)만 허용(javascript: 등 차단).
+  const ESC = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+  const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) => ESC[c]);
+  const safeUrl = (u) => { const s = String(u == null ? "" : u).trim(); return /^https?:\/\//i.test(s) ? s : ""; };
+
   // ---- 카테고리 매핑 (product_type → 한국어) ----
   const CAT = [
     ["아우터", ["JACKET", "COAT", "OUTER", "BLOUSON", "PARKA"]],
@@ -25978,17 +25984,18 @@ window.__COMOLI__ = {
     const badge = p.anyAvailable ? "" : '<span class="badge soldout">SOLD OUT</span>';
     const shops = p.shops;
     const shopSummary = shops.length <= 2
-      ? shops.join(" · ")
-      : `${shops.slice(0, 2).join(" · ")} <span class="more">외 ${shops.length - 2}곳</span>`;
+      ? shops.map(esc).join(" · ")
+      : `${shops.slice(0, 2).map(esc).join(" · ")} <span class="more">외 ${shops.length - 2}곳</span>`;
+    const img = safeUrl(p.image);
     el.innerHTML = `
       <div class="thumb">
-        ${p.image ? `<img loading="lazy" src="${p.image}" alt="">` : ""}
+        ${img ? `<img loading="lazy" src="${esc(img)}" alt="">` : ""}
         ${badge}
       </div>
-      <div class="cmeta">${catOf(p)}${p.isHinban ? ` · ${p.hinban}` : ""}</div>
-      <div class="name">${p.nameEn || p.representativeName || ""}</div>
-      ${p.nameEn ? `<div class="namejp">${p.representativeName || ""}</div>` : ""}
-      <div class="price">${priceLabel(p)}</div>
+      <div class="cmeta">${esc(catOf(p))}${p.isHinban ? ` · ${esc(p.hinban)}` : ""}</div>
+      <div class="name">${esc(p.nameEn || p.representativeName || "")}</div>
+      ${p.nameEn ? `<div class="namejp">${esc(p.representativeName || "")}</div>` : ""}
+      <div class="price">${esc(priceLabel(p))}</div>
       <div class="cshops">${shopSummary}</div>`;
     el.onclick = () => openModal(p);
     return el;
@@ -25998,7 +26005,8 @@ window.__COMOLI__ = {
   function miniCard(p) {
     const el = document.createElement("div");
     el.className = "mini" + (p.anyAvailable ? "" : " out");
-    el.innerHTML = p.image ? `<img loading="lazy" src="${p.image}" alt="">` : "";
+    const mimg = safeUrl(p.image);
+    el.innerHTML = mimg ? `<img loading="lazy" src="${esc(mimg)}" alt="">` : "";
     el.title = `${p.nameEn || p.representativeName || ""} · ${priceLabel(p)}`;
     el.onclick = (e) => { if (e) e.stopPropagation(); openModal(p); };
     return el;
@@ -26046,7 +26054,7 @@ window.__COMOLI__ = {
         const head = document.createElement("div");
         head.className = "dropgroup-head";
         const label = prev
-          ? `<span class="prevtag">이전 시즌</span> ${grp.label || grp.season} <span class="cnt">· ${grp.items.length}개</span>`
+          ? `<span class="prevtag">이전 시즌</span> ${esc(grp.label || grp.season)} <span class="cnt">· ${grp.items.length}개</span>`
           : dropHeader(grp.rel, grp.items.length);
         head.innerHTML = `<span class="chev">${collapsed ? "▸" : "▾"}</span>${label}`;
         head.onclick = () => { state.fold[wrap.id] = !collapsed; render(); };
@@ -26087,14 +26095,16 @@ window.__COMOLI__ = {
       DATA.unmatched.forEach((u) => {
         const el = document.createElement("div");
         el.className = "card";
+        const uimg = safeUrl(u.image);
         el.innerHTML = `
-          <div class="thumb">${u.image ? `<img loading="lazy" src="${u.image}">` : ""}
-            <span class="badge">${u.shop}</span></div>
+          <div class="thumb">${uimg ? `<img loading="lazy" src="${esc(uimg)}">` : ""}
+            <span class="badge">${esc(u.shop)}</span></div>
           <div class="cat">품번 미상</div>
-          <div class="name">${u.productName || ""}</div>
-          <div class="hin">${u.internalCode || ""}</div>
-          <div class="price">${u.count}개 변형</div>`;
-        if (u.productUrl) el.onclick = () => window.open(u.productUrl, "_blank");
+          <div class="name">${esc(u.productName || "")}</div>
+          <div class="hin">${esc(u.internalCode || "")}</div>
+          <div class="price">${esc(u.count)}개 변형</div>`;
+        const uurl = safeUrl(u.productUrl);
+        if (uurl) el.onclick = () => window.open(uurl, "_blank", "noopener");
         ug.appendChild(el);
       });
     } else uw.style.display = "none";
@@ -26127,27 +26137,28 @@ window.__COMOLI__ = {
       const d = data.get(c);
       const shops = [...d.shops];
       const sizes = [...d.sizes].sort(natural);
-      const label = c === "__none" ? "" : `<div class="cname">${c}</div>`;
-      const head = `<tr><th class="sz">사이즈${shops.length > 1 ? " \\ 숍" : ""}</th>${shops.map((s) => `<th>${s}</th>`).join("")}</tr>`;
+      const label = c === "__none" ? "" : `<div class="cname">${esc(c)}</div>`;
+      const head = `<tr><th class="sz">사이즈${shops.length > 1 ? " \\ 숍" : ""}</th>${shops.map((s) => `<th>${esc(s)}</th>`).join("")}</tr>`;
       const rows = sizes.map((sz) =>
-        `<tr><th class="sz">${sz}</th>${shops.map((s) => cellHtml(d.av.get(sz + "|" + s))).join("")}</tr>`).join("");
+        `<tr><th class="sz">${esc(sz)}</th>${shops.map((s) => cellHtml(d.av.get(sz + "|" + s))).join("")}</tr>`).join("");
       return `<div class="cblock">${label}<table class="matrix">${head}${rows}</table></div>`;
     }).join("");
     const buyUrl = (shop) => {
-      for (const s of p.sizes) { const e = s.shops.find((x) => x.shop === shop); if (e) return e.productUrl; }
+      for (const s of p.sizes) { const e = s.shops.find((x) => x.shop === shop); if (e) return safeUrl(e.productUrl) || "#"; }
       return "#";
     };
-    const names = Object.entries(p.namesByShop).map(([s, n]) => `${s}: ${n}`).join(" · ");
+    const names = Object.entries(p.namesByShop).map(([s, n]) => `${esc(s)}: ${esc(n)}`).join(" · ");
     const buys = shops.map((s) =>
-      `<a class="buy" href="${buyUrl(s)}" target="_blank" rel="noopener"><span>${s} 에서 보기</span><span>↗</span></a>`).join("");
+      `<a class="buy" href="${esc(buyUrl(s))}" target="_blank" rel="noopener"><span>${esc(s)} 에서 보기</span><span>↗</span></a>`).join("");
+    const mimg = safeUrl(p.image);
     $("#modal").innerHTML = `
-      <div class="mimg">${p.image ? `<img src="${p.image}">` : ""}</div>
+      <div class="mimg">${mimg ? `<img src="${esc(mimg)}">` : ""}</div>
       <div class="mbody">
-        <div class="mcat">${catOf(p)}${p.release && p.release.releaseDate ? ` · 발매 ${fmtDate(p.release.releaseDate)}${p.release.dropNo ? ` (${p.release.dropNo}차 드랍)` : ""}` : ""} · ${p.colors.join(" / ") || "-"}</div>
-        <h2 class="mname">${p.nameEn || p.representativeName || ""}</h2>
-        ${p.nameEn ? `<div class="mnamejp">${p.representativeName || ""}</div>` : ""}
-        <div class="mhin">${p.isHinban ? "품번 " + p.hinban : p.release && p.release.en ? p.release.en : ""}</div>
-        <div class="mprice">${priceLabel(p)}</div>
+        <div class="mcat">${esc(catOf(p))}${p.release && p.release.releaseDate ? ` · 발매 ${fmtDate(p.release.releaseDate)}${p.release.dropNo ? ` (${p.release.dropNo}차 드랍)` : ""}` : ""} · ${esc(p.colors.join(" / ") || "-")}</div>
+        <h2 class="mname">${esc(p.nameEn || p.representativeName || "")}</h2>
+        ${p.nameEn ? `<div class="mnamejp">${esc(p.representativeName || "")}</div>` : ""}
+        <div class="mhin">${p.isHinban ? "품번 " + esc(p.hinban) : p.release && p.release.en ? esc(p.release.en) : ""}</div>
+        <div class="mprice">${esc(priceLabel(p))}</div>
         <div class="stock-by-color">${colorBlocks}</div>
         <div class="legend">○ 재고 있음 · × 품절 · ? 재고 미확인(숍에서 확인) · – 미취급</div>
         <div class="mnames">${names}</div>
