@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>COMOLI 재고 · 일본 셀렉트숍 횡단</title>
+<title>FIND CLOTHES · 파인드클로스 · 일본 셀렉트숍 재고 통합</title>
 <style>
   :root{
     /* COMOLI 공식 사이트 톤: 중립 화이트 배경, 소프트 블랙, 얇은 회색 라인 */
@@ -20,6 +20,12 @@
   .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
   .brand h1{font-size:19px;letter-spacing:.18em;margin:0;font-weight:700}
   .brand .sub{font-size:12px;color:var(--muted);letter-spacing:.02em}
+  .brandtabs{display:flex;gap:0;margin-top:12px;border-bottom:1px solid var(--line)}
+  .brandtab{padding:8px 18px 9px;font-size:14px;font-weight:700;letter-spacing:.06em;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none}
+  .brandtab.on{color:var(--fg);border-bottom-color:var(--fg)}
+  .brandtab .soon{font-size:9.5px;letter-spacing:0;color:#fff;background:var(--muted);border-radius:3px;padding:1px 5px;margin-left:6px;font-weight:700;vertical-align:middle}
+  .soon-msg{text-align:center;color:var(--muted);font-size:14px;line-height:1.9;padding:80px 20px;border:1.5px dashed var(--line);border-radius:8px;background:var(--soft)}
+  .soon-msg b{color:var(--fg);font-size:16px;letter-spacing:.06em}
   .meta{margin-top:6px;font-size:11.5px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
   .meta b{color:var(--fg);font-weight:600}
   .controls{max-width:1280px;margin:14px auto 0;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
@@ -147,14 +153,15 @@
 <body>
 <header>
   <div class="brand">
-    <h1>COMOLI 在庫</h1>
-    <span class="sub">일본 셀렉트숍 횡단 재고 검색 · 한국어</span>
+    <h1>FIND CLOTHES</h1>
+    <span class="sub">파인드클로스 · 일본 셀렉트숍 재고 통합</span>
   </div>
+  <div class="brandtabs" id="brands"></div>
   <div class="meta">
     <span>업데이트 <b id="updated">—</b></span>
     <span><b id="shopn">—</b></span>
   </div>
-  <div class="controls">
+  <div class="controls" id="filterbar">
     <input id="q" class="search" placeholder="품번 또는 상품명 검색 (예: D01-05029, シャツ)">
     <span id="cats"></span>
     <span id="drops"></span>
@@ -198,7 +205,7 @@
 
 <script>
 window.__COMOLI__ = {
-  "generatedAt": "2026-06-09T03:18:45.680Z",
+  "generatedAt": "2026-06-09T03:36:05.875Z",
   "note": "프리뷰: COVERCHORD 실데이터(온라인 게시 9개) + DIVERSE/casanova/MAIDENS/COTYLE 실데이터 + 합성 1숍. 발매순 정렬(공식 INFO 기준).",
   "products": [
     {
@@ -407,7 +414,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T12:37:53+09:00",
       "nameEn": "STRIPE SKIPPER SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05024",
@@ -702,7 +710,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T11:04:27+09:00",
       "nameEn": "SUMMER WOOL S/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01035",
@@ -899,7 +908,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T11:04:26+09:00",
       "nameEn": "STRIPE JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05029",
@@ -1172,7 +1182,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T11:04:23+09:00",
       "nameEn": "SURPLUS T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-07001",
@@ -1359,7 +1370,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T11:02:11+09:00",
       "nameEn": "SILK NEP WAIST BAG",
-      "category": "가방"
+      "category": "가방",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05025",
@@ -1519,7 +1531,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T00:00:12+09:00",
       "nameEn": "SUMMER WOOL TANK TOP",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05046",
@@ -1703,7 +1716,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T00:00:07+09:00",
       "nameEn": "GREY FLEECE SWEAT S/S CREW NECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02016",
@@ -1796,7 +1810,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-22T00:00:06+09:00",
       "nameEn": "REVERSIBLE S/S SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02007",
@@ -1874,7 +1889,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-21T20:31:59+09:00",
       "nameEn": "MUSLIN PULLOVER SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05036",
@@ -2010,7 +2026,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:52+09:00",
       "nameEn": "PILE ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02004",
@@ -2211,7 +2228,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:50+09:00",
       "nameEn": "OXFORD PULLOVER",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-07005",
@@ -2431,7 +2449,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:49+09:00",
       "nameEn": "COMOLI×FOOTWORKS TIROLEAN BOOTS",
-      "category": "신발"
+      "category": "신발",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01039",
@@ -2581,7 +2600,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:48+09:00",
       "nameEn": "RIPSTOP SMOCK PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01016",
@@ -2902,7 +2922,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:47+09:00",
       "nameEn": "OXFORD 1938 JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01024",
@@ -3155,7 +3176,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:42+09:00",
       "nameEn": "OXFORD ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01034",
@@ -3294,7 +3316,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:41+09:00",
       "nameEn": "MESH SMOCK PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01015",
@@ -3644,7 +3667,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:38+09:00",
       "nameEn": "KHADI COTTON JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05038",
@@ -3805,7 +3829,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:37+09:00",
       "nameEn": "PILE PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03022",
@@ -4074,7 +4099,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:36+09:00",
       "nameEn": "RIPSTOP CONVERTIBLE 6P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05014",
@@ -4720,7 +4746,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:34+09:00",
       "nameEn": "COTTON JERSEY S/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05015",
@@ -5111,7 +5138,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T10:59:33+09:00",
       "nameEn": "COTTON JERSEY SLEEVELESS T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05020",
@@ -5329,7 +5357,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:13+09:00",
       "nameEn": "LW COTTON SHORTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06017",
@@ -5383,7 +5412,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:13+09:00",
       "nameEn": "CASHMERE S/S KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05019",
@@ -5655,7 +5685,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:12+09:00",
       "nameEn": "LW COTTON S/S CREW NECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06018",
@@ -5709,7 +5740,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:12+09:00",
       "nameEn": "CASHMERE V NECK CARDIGAN",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02006",
@@ -5884,7 +5916,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:11+09:00",
       "nameEn": "SILK GARMENT DYED WESTERN SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03013",
@@ -6023,7 +6056,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-05-05T00:00:11+09:00",
       "nameEn": "OXFORD CONVERTIBLE PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06014",
@@ -6178,7 +6212,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:24+09:00",
       "nameEn": "LINEN CREW NECK KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05022",
@@ -6347,7 +6382,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:23+09:00",
       "nameEn": "SUMMER WOOL L/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05039",
@@ -6556,7 +6592,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:22+09:00",
       "nameEn": "JERSEY ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05026",
@@ -6727,7 +6764,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:21+09:00",
       "nameEn": "SURPLUS L/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01013",
@@ -6947,7 +6985,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:20+09:00",
       "nameEn": "SILK COTTON B.D.U JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01022",
@@ -7191,7 +7230,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:19+09:00",
       "nameEn": "SILK COTTON JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03019",
@@ -7357,7 +7397,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:18+09:00",
       "nameEn": "SILK COTTON DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03011",
@@ -7527,7 +7568,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T11:00:17+09:00",
       "nameEn": "SILK COTTON 6P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05047",
@@ -7809,7 +7851,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T00:15:54+09:00",
       "nameEn": "GREY FLEECE SWEAT PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05045",
@@ -8110,7 +8153,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T00:15:36+09:00",
       "nameEn": "GREY FLEECE SWEAT CREW NECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05023",
@@ -8231,7 +8275,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T00:00:15+09:00",
       "nameEn": "SUMMER WOOL PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05021",
@@ -8400,7 +8445,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T00:00:13+09:00",
       "nameEn": "SUMMER WOOL JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01014",
@@ -8532,7 +8578,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-17T00:00:07+09:00",
       "nameEn": "WHITE JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02001",
@@ -9378,7 +9425,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-09T13:07:55+09:00",
       "nameEn": "COMOLI SHIRTS",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06011",
@@ -9491,7 +9539,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:42+09:00",
       "nameEn": "COTTON CREW NECK KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06013",
@@ -9622,7 +9671,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:41+09:00",
       "nameEn": "COTTON KNIT POLO",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06012",
@@ -9714,7 +9764,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:39+09:00",
       "nameEn": "COTTON V NECK CARDIGAN",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05013",
@@ -9910,7 +9961,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:38+09:00",
       "nameEn": "COTTON JERSEY BOAT NECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-07002",
@@ -10061,7 +10113,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:37+09:00",
       "nameEn": "SILK NEP HAT",
-      "category": "모자"
+      "category": "모자",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-07003",
@@ -10229,7 +10282,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:35+09:00",
       "nameEn": "SILK NEP CAP",
-      "category": "모자"
+      "category": "모자",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01007",
@@ -10479,7 +10533,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:34+09:00",
       "nameEn": "SILK NEP ZIP SHORT JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01012",
@@ -10665,7 +10720,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:33+09:00",
       "nameEn": "COTTON DUCK JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06015",
@@ -10836,7 +10892,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:31+09:00",
       "nameEn": "COTTON HOCKEY KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03017",
@@ -11041,7 +11098,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:30+09:00",
       "nameEn": "CAMO CONVERTIBLE 6P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03007",
@@ -11221,7 +11279,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:28+09:00",
       "nameEn": "COTTON DUCK PAINTER PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03008",
@@ -11483,7 +11542,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:27+09:00",
       "nameEn": "SILK NEP DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03010",
@@ -11636,7 +11696,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:26+09:00",
       "nameEn": "COTTON DUCK TAPERED PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02003",
@@ -11914,7 +11975,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T11:00:22+09:00",
       "nameEn": "RAYON COMOLI SHIRTS",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01008",
@@ -12055,7 +12117,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T00:01:17+09:00",
       "nameEn": "SILK NEP ALL-IN-ONE",
-      "category": "셋업"
+      "category": "셋업",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05028",
@@ -12178,7 +12241,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-04-03T00:00:18+09:00",
       "nameEn": "JERSEY WESTERN SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-03003",
@@ -12496,7 +12560,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2026-03-26T18:54:32+09:00",
       "nameEn": "DENIM 5P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06016",
@@ -12593,7 +12658,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T13:01:36+09:00",
       "nameEn": "MOTIF KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06007",
@@ -12726,7 +12792,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T13:01:27+09:00",
       "nameEn": "8G CREW NECK KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05016",
@@ -13072,7 +13139,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T13:01:19+09:00",
       "nameEn": "LW COTTON ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01020",
@@ -13318,7 +13386,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T13:00:56+09:00",
       "nameEn": "CANAPA VEST",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01006",
@@ -13527,7 +13596,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:26+09:00",
       "nameEn": "BLACK DRILL JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01009",
@@ -13741,7 +13811,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:25+09:00",
       "nameEn": "CANAPA ZIP JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06019",
@@ -13874,7 +13945,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:24+09:00",
       "nameEn": "COTTON SHAGGY CREW NECK KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06008",
@@ -14016,7 +14088,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:20+09:00",
       "nameEn": "8G ZIP CARDIGAN",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03004",
@@ -14187,7 +14260,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:18+09:00",
       "nameEn": "BLACK DRILL TAPERED PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03009",
@@ -14440,7 +14514,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:17+09:00",
       "nameEn": "CANAPA DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "CANAPA SUIT",
@@ -14518,7 +14593,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:15+09:00",
       "nameEn": "CANAPA SUIT",
-      "category": "셋업"
+      "category": "셋업",
+      "brand": "COMOLI"
     },
     {
       "hinban": "COTTON TWILL SUIT",
@@ -14600,7 +14676,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T11:00:13+09:00",
       "nameEn": "COTTON TWILL SUIT",
-      "category": "셋업"
+      "category": "셋업",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05018",
@@ -14874,7 +14951,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T00:00:15+09:00",
       "nameEn": "LW COTTON PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05002",
@@ -15381,7 +15459,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T00:00:14+09:00",
       "nameEn": "COTTON SWEAT CREWNECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01010",
@@ -15551,7 +15630,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T00:00:11+09:00",
       "nameEn": "CANAPA STAND COLLAR JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "CANAPA STAND COLLAR JACKET",
@@ -15629,7 +15709,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-20T00:00:10+09:00",
       "nameEn": "CANAPA STAND COLLAR JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06005",
@@ -15757,7 +15838,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T13:25:12+09:00",
       "nameEn": "CASHMERE WASHI ZIP SHORT JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05012",
@@ -16153,7 +16235,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:46+09:00",
       "nameEn": "COTTON JERSEY L/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05041",
@@ -16437,7 +16520,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:45+09:00",
       "nameEn": "COTTON WAFFLE L/S CREW",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01030",
@@ -16602,7 +16686,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:43+09:00",
       "nameEn": "BLACK DRILL ZIP JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "SUEDE TYPE-1st",
@@ -16707,7 +16792,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:42+09:00",
       "nameEn": "SUEDE TYPE-1st",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06004",
@@ -16864,7 +16950,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:40+09:00",
       "nameEn": "CASHMERE WASHI COMOLI KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-02002",
@@ -17008,7 +17095,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T11:00:38+09:00",
       "nameEn": "COTTON WESTERN SHIRT",
-      "category": "셔츠"
+      "category": "셔츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06006",
@@ -17085,7 +17173,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-03-06T00:00:14+09:00",
       "nameEn": "CASHMERE WASHI KNIT PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01003",
@@ -17305,7 +17394,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:23+09:00",
       "nameEn": "POST WORK TWILL JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01031",
@@ -17591,7 +17681,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:22+09:00",
       "nameEn": "POST WORK TWILL CAP SHOULDER BLOUSON",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01028",
@@ -17734,7 +17825,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:21+09:00",
       "nameEn": "HEMP DUCK ZIP SHORT JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-06010",
@@ -17837,7 +17929,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:20+09:00",
       "nameEn": "5G KNIT CARDIGAN",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03003",
@@ -18037,7 +18130,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:19+09:00",
       "nameEn": "POST WORK TWILL PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03018",
@@ -18394,7 +18488,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:17+09:00",
       "nameEn": "POST WORK TWILL HUNTING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03020",
@@ -18590,7 +18685,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-21T11:01:16+09:00",
       "nameEn": "COTTON RIPSTOP HUNTING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "Z01-04003",
@@ -18708,7 +18804,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 S/S",
       "chrono": "2026-02-21T00:00:03+09:00",
       "nameEn": "PILE JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-03006",
@@ -19081,7 +19178,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-08T19:00:06+09:00",
       "nameEn": "CORDUROY DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01027",
@@ -19192,7 +19290,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-02-06T00:00:02+09:00",
       "nameEn": "PAPER LEATHER PADDED JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05001",
@@ -19497,7 +19596,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-01-16T11:00:23+09:00",
       "nameEn": "COTTON SWEAT ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05004",
@@ -19800,7 +19900,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-01-16T11:00:22+09:00",
       "nameEn": "COTTON SWEAT PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-05003",
@@ -20142,7 +20243,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-01-16T11:00:20+09:00",
       "nameEn": "COTTON SWEAT PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "D01-01002",
@@ -20400,7 +20502,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2026 S/S",
       "chrono": "2026-01-15T23:35:43+09:00",
       "nameEn": "BLACK DENIM WORK JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-04004",
@@ -20515,7 +20618,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-28T00:00:11+09:00",
       "nameEn": "CASHMERE SHAWL COLLAR COAT",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-08003",
@@ -20605,7 +20709,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-28T00:00:08+09:00",
       "nameEn": "WOOL FLANNEL SUIT",
-      "category": "셋업"
+      "category": "셋업",
+      "brand": "COMOLI"
     },
     {
       "hinban": "COTTON SILK MILITARY HOODED JACKET",
@@ -20701,7 +20806,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-28T00:00:04+09:00",
       "nameEn": "COTTON SILK MILITARY HOODED JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-07015",
@@ -20970,7 +21076,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-21T00:00:08+09:00",
       "nameEn": "GUIDI SPECIAL VS BACK ZIP BOOTS",
-      "category": "신발"
+      "category": "신발",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-04008",
@@ -21169,7 +21276,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-14T00:00:09+09:00",
       "nameEn": "CASHMERE BAL COLLAR COAT",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-03009",
@@ -21290,7 +21398,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-14T00:00:08+09:00",
       "nameEn": "CASHMERE SILK TAPERED PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-03019",
@@ -21395,7 +21504,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-14T00:00:08+09:00",
       "nameEn": "MOLESKIN 5P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-03013",
@@ -21560,7 +21670,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-14T00:00:06+09:00",
       "nameEn": "CASHMERE DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-04011",
@@ -21689,7 +21800,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-14T00:00:04+09:00",
       "nameEn": "CAMEL SHAGGY JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-08001",
@@ -21826,7 +21938,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-03T19:00:03+09:00",
       "nameEn": "BLACK FORMAL SUIT",
-      "category": "셋업"
+      "category": "셋업",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-06007",
@@ -22024,7 +22137,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-11-03T18:57:05+09:00",
       "nameEn": "LAMBS WOOL CREW NECK KNIT",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "Y03-03020",
@@ -22160,7 +22274,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2023 A/W",
       "chrono": "2025-10-31T00:00:13+09:00",
       "nameEn": "CORDUROY PIPED STEM PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-01006",
@@ -22272,7 +22387,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-10-17T11:02:55+09:00",
       "nameEn": "SHEEPSKIN JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-06002",
@@ -22371,7 +22487,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-10-17T00:00:21+09:00",
       "nameEn": "WOOL KNIT PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-06003",
@@ -22499,7 +22616,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-10-17T00:00:20+09:00",
       "nameEn": "WOOL KNIT ZIP PARKA",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-07001",
@@ -22616,7 +22734,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-10-04T20:30:34+09:00",
       "nameEn": "HEMP DUCK SHOULDER BAG",
-      "category": "가방"
+      "category": "가방",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-05009",
@@ -22829,7 +22948,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-10-03T12:59:54+09:00",
       "nameEn": "COTTON CASHMERE L/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-05005",
@@ -23062,7 +23182,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-09-19T14:43:02+09:00",
       "nameEn": "COTTON JERSEY G8 JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-05006",
@@ -23278,7 +23399,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-09-19T11:02:55+09:00",
       "nameEn": "COTTON JERSEY KNEE TUCK PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-03023",
@@ -23396,7 +23518,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-09-19T00:00:42+09:00",
       "nameEn": "CASHMERE SILK DRAWSTRING PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "C03-06012",
@@ -23500,7 +23623,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 A/W",
       "chrono": "2025-09-19T00:00:40+09:00",
       "nameEn": "WOOL KNIT TAPERED PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05038",
@@ -23671,7 +23795,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T15:46:25+09:00",
       "nameEn": "COTTON MESH SHORTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05036",
@@ -23870,7 +23995,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T15:45:55+09:00",
       "nameEn": "COTTON MESH S/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05032",
@@ -24076,7 +24202,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T11:00:29+09:00",
       "nameEn": "WOOL MESH S/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05033",
@@ -24239,7 +24366,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T11:00:29+09:00",
       "nameEn": "WOOL MESH SLEEVELESS",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05037",
@@ -24418,7 +24546,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T11:00:26+09:00",
       "nameEn": "COTTON MESH SLEEVELESS",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05034",
@@ -24549,7 +24678,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-07-04T11:00:25+09:00",
       "nameEn": "WOOL MESH SHORTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05026",
@@ -24649,7 +24779,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-06-17T18:19:00+09:00",
       "nameEn": "LW COTTON S/S CREW NECK",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-05010",
@@ -24828,7 +24959,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-05-17T00:00:14+09:00",
       "nameEn": "COTTON JERSEY S/S T-SHIRT",
-      "category": "컷&소"
+      "category": "컷&소",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-06014",
@@ -24967,7 +25099,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-03-22T11:05:00+09:00",
       "nameEn": "REVERSIBLE PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-06013",
@@ -25081,7 +25214,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-03-22T00:15:24+09:00",
       "nameEn": "REVERSIBLE PULLOVER",
-      "category": "니트"
+      "category": "니트",
+      "brand": "COMOLI"
     },
     {
       "hinban": "B01-07001",
@@ -25146,7 +25280,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2025 S/S",
       "chrono": "2025-03-22T00:00:58+09:00",
       "nameEn": "HEMP DUCK SHOULDER BAG",
-      "category": "가방"
+      "category": "가방",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-04007",
@@ -25238,7 +25373,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-11-19T15:38:41+09:00",
       "nameEn": "CASHMERE ROBE COAT",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-03017",
@@ -25352,7 +25488,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-11-08T11:00:52+09:00",
       "nameEn": "SHEEPSKIN 6P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-04016",
@@ -25442,7 +25579,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-10-30T12:29:52+09:00",
       "nameEn": "CASHMERE BAL COLLAR COAT",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-03014",
@@ -25566,7 +25704,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-10-11T13:27:15+09:00",
       "nameEn": "MILLED WOOL 6P PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-01030",
@@ -25717,7 +25856,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-09-27T00:00:04+09:00",
       "nameEn": "B.D.U JACKET",
-      "category": "아우터"
+      "category": "아우터",
+      "brand": "COMOLI"
     },
     {
       "hinban": "A03-06027",
@@ -25860,7 +26000,8 @@ window.__COMOLI__ = {
       "seasonLabel": "2024 A/W",
       "chrono": "2024-09-13T11:00:25+09:00",
       "nameEn": "WOOL KNIT KNEE TUCK PANTS",
-      "category": "팬츠"
+      "category": "팬츠",
+      "brand": "COMOLI"
     }
   ],
   "unmatched": []
@@ -25907,7 +26048,26 @@ window.__COMOLI__ = {
   // 카테고리 칩
   const present = ["전체", ...[...new Set(DATA.products.map((p) => catOf(p)))]
     .sort((a, b) => CAT_ORDER.indexOf(a) - CAT_ORDER.indexOf(b))];
-  const state = { cat: "전체", q: "", stockOnly: false, sort: "release-desc", drop: "전체", fold: {} };
+  const state = { brand: "COMOLI", cat: "전체", q: "", stockOnly: false, sort: "release-desc", drop: "전체", fold: {} };
+
+  // 브랜드 탭 (멀티브랜드). ready:false 는 '준비 중'(수집 전)
+  const BRANDS = [
+    { id: "COMOLI", label: "COMOLI", ready: true },
+    { id: "A.PRESSE", label: "A.PRESSE", ready: false },
+  ];
+  const brandsEl = $("#brands");
+  if (brandsEl) BRANDS.forEach((b) => {
+    const el = document.createElement("button");
+    el.className = "brandtab" + (b.id === state.brand ? " on" : "");
+    el.innerHTML = `${b.label}${b.ready ? "" : '<span class="soon">준비중</span>'}`;
+    el.onclick = () => {
+      state.brand = b.id;
+      [...brandsEl.children].forEach((x) => x.classList.toggle("on", x === el));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      render();
+    };
+    brandsEl.appendChild(el);
+  });
   const fmtDate = (d) => d ? d.slice(5).replace("-", "/") : ""; // 2026-05-15 → 05/15
   const chronoKey = (p) => p.chrono || (p.release && p.release.releaseDate ? p.release.releaseDate : "");
   const relKey = (p) => p.release && p.release.releaseDate ? p.release.releaseDate : "9999-99-99";
@@ -25967,6 +26127,7 @@ window.__COMOLI__ = {
 
   function filtered() {
     let list = DATA.products.filter((p) => {
+      if ((p.brand || "COMOLI") !== state.brand) return false;
       if (state.cat !== "전체" && catOf(p) !== state.cat) return false;
       if (state.stockOnly && !p.anyAvailable) return false;
       if (state.q) {
@@ -26028,10 +26189,23 @@ window.__COMOLI__ = {
   };
 
   function render() {
-    const list = filtered();
-    $("#count").textContent = `${list.length}개 상품 · 통합 품번 기준`;
     const g = $("#grid");
     g.innerHTML = "";
+    // 준비 중 브랜드(수집 전): 안내만 표시
+    const brandObj = BRANDS.find((b) => b.id === state.brand);
+    if (brandObj && !brandObj.ready) {
+      $("#count").textContent = "";
+      const fb = $("#filterbar"); if (fb) fb.style.display = "none";
+      const nav = $("#navrow"); if (nav) nav.style.display = "none";
+      g.className = "";
+      g.innerHTML = `<div class="soon-msg"><b>${brandObj.label}</b><br>재고 통합을 준비 중입니다.<br>곧 이 브랜드도 추가될 예정이에요.</div>`;
+      const uw = $("#unmatched-wrap"); if (uw) uw.style.display = "none";
+      return;
+    }
+    const _fb = $("#filterbar"); if (_fb) _fb.style.display = "";
+    const _nav = $("#navrow"); if (_nav) _nav.style.display = "";
+    const list = filtered();
+    $("#count").textContent = `${list.length}개 상품 · 통합 품번 기준`;
     // 카테고리 선택 시: 그 카테고리만 평면 그리드(최신순). '전체'일 때만 발매일별 묶음/미리보기.
     const jump = $("#drops"); if (jump) jump.style.display = state.cat === "전체" ? "" : "none"; // 발매일이동은 전체뷰에서만
     const grouped = (state.sort === "release" || state.sort === "release-desc") && state.cat === "전체";
